@@ -77,7 +77,7 @@ const UserProfile = () => {
         }
       });
       alert("Endereço removido com sucesso!");
-      // Atualiza o estado do perfil para remover o endereço da UI
+  
       setCustomerProfile(prevProfile => ({
         ...prevProfile,
         addresses: prevProfile.addresses.filter(addr => addr.id !== addressId)
@@ -85,8 +85,7 @@ const UserProfile = () => {
     } catch (err) {
       console.error("Erro ao remover endereço:", err);
       alert(`Erro ao remover endereço: ${err.response?.data?.message || err.message || 'Verifique sua conexão.'}`);
-      // Em caso de erro, talvez seja bom recarregar o perfil completo para garantir a consistência
-      // fetchUserProfile(); // CUIDADO: pode causar loop se houver um problema persistente
+
     }
   };
   // ----------------------------------------

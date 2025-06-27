@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'; // Adicione useEffect para pegar customerId
+import React, { useState, useEffect } from 'react'; 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../../Pages/CSS/LoginSignup.css'; // Reutiliza o mesmo CSS
+import '../../Pages/CSS/LoginSignup.css'; 
 
 const AddressForm = () => {
   const navigate = useNavigate();
@@ -12,13 +12,13 @@ const AddressForm = () => {
     city: '',
     state: '',
     complement: '',
-    zipcode: '', // Manter como string inicialmente para fácil input
-    customerId: null // Será preenchido do localStorage
+    zipcode: '', 
+    customerId: null 
   });
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
 
-  // Pega o customerId do localStorage assim que o componente monta
+
   useEffect(() => {
     const storedCustomerId = localStorage.getItem('customerId');
     if (storedCustomerId) {
@@ -29,8 +29,8 @@ const AddressForm = () => {
     } else {
       setMessage("Você precisa estar logado para adicionar um endereço.");
       setMessageType('error');
-      // Opcional: redirecionar para o login
-      // navigate('/login');
+     
+     
     }
   }, []);
 
@@ -38,7 +38,7 @@ const AddressForm = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: name === 'zipcode' ? value.replace(/\D/g, '') : value // Remove não-dígitos do CEP
+      [name]: name === 'zipcode' ? value.replace(/\D/g, '') : value
     });
   };
 
@@ -53,9 +53,9 @@ const AddressForm = () => {
       return;
     }
 
-    // Validação básica do CEP para o backend (espera Long)
+   
     const zipcodeNum = parseInt(formData.zipcode, 10);
-    if (isNaN(zipcodeNum) || formData.zipcode.length < 8) { // CEP brasileiro tem 8 dígitos numéricos
+    if (isNaN(zipcodeNum) || formData.zipcode.length < 8) {
         setMessage("CEP inválido. Por favor, digite apenas os números (8 dígitos).");
         setMessageType('error');
         return;
@@ -70,7 +70,7 @@ const AddressForm = () => {
         return;
       }
 
-      // Payload para o backend - convertendo zipcode para Long
+     
       const payload = {
         street: formData.street,
         number: formData.number,
@@ -78,12 +78,11 @@ const AddressForm = () => {
         city: formData.city,
         state: formData.state,
         complement: formData.complement,
-        zipcode: zipcodeNum, // Envia como número
+        zipcode: zipcodeNum, 
         customerId: formData.customerId
       };
 
-      // Endpoint para adicionar endereço: /api/addresses ou /api/customers/{customerId}/addresses
-      // Eu sugiro /api/addresses e você valida o customerId no backend com o token.
+
       const response = await axios.post('http://localhost:8080/api/addresses', payload, {
         headers: {
           'Content-Type': 'application/json',
@@ -94,8 +93,8 @@ const AddressForm = () => {
       console.log('Endereço cadastrado com sucesso:', response.data);
       setMessage("Endereço cadastrado com sucesso!");
       setMessageType('success');
-      // Opcional: redirecionar para uma página de lista de endereços ou perfil
-      navigate('/profile/addresses'); // Assumindo que você terá essa rota
+      
+      navigate('/profile/addresses');
 
     } catch (error) {
       console.error('Erro ao cadastrar endereço:', error);
@@ -129,7 +128,7 @@ const AddressForm = () => {
         {message && <p className={`message ${messageType}`}>{message}</p>}
         <p className="loginsignup-login">
           <span
-            onClick={() => navigate('/profile/addresses')} // Link de volta para a lista de endereços ou perfil
+            onClick={() => navigate('/profile/addresses')} 
             style={{ cursor: 'pointer', textDecoration: 'underline' }}
           >
             Voltar para Meus Endereços

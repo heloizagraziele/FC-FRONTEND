@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'; // Mantenha todos os imports
+import React, { useContext, useState, useEffect } from 'react'; 
 import './CartItems.css';
 import { ShopContext } from '../../Context/ShopContext';
 import remove_icon from '../Assets/cart_cross_icon.png';
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const CartItems = () => {
-    // --- CORREÇÃO AQUI: Mude 'cartProducts' para 'all_products' ---
+    
     const { getTotalCartAmount, all_products, cartItems, removeFromCart, clearCart } = useContext(ShopContext);
     const navigate = useNavigate();
 
@@ -68,8 +68,8 @@ const CartItems = () => {
 
         const items = Object.keys(cartItems).map(productId => {
             const quantity = cartItems[productId];
-            // --- CORREÇÃO AQUI: Use 'all_products' para encontrar o produto ---
-            const product = all_products.find(p => p.id === parseInt(productId, 10)); // Convert productId to number
+           
+            const product = all_products.find(p => p.id === parseInt(productId, 10)); 
             if (!product) {
                 console.error(`Produto com ID ${productId} não encontrado em all_products.`);
                 throw new Error(`Produto ${productId} não disponível.`);
@@ -125,8 +125,8 @@ const CartItems = () => {
 
             {Object.keys(cartItems).map((productId) => {
                 const quantity = cartItems[productId];
-                // --- CORREÇÃO AQUI: Use 'all_products' para encontrar o produto ---
-                const product = all_products.find(p => p.id === parseInt(productId, 10)); // Use find para encontrar o objeto completo
+                
+                const product = all_products.find(p => p.id === parseInt(productId, 10)); 
 
                 if (!product || quantity === 0) return null;
 

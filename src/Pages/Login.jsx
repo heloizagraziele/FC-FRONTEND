@@ -30,40 +30,40 @@ const Login = () => {
       setMessage("Login realizado com sucesso!");
       setMessageType('success');
 
-      // Salva os dados do usuário no localStorage para manter a sessão
+
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('customerName', response.data.name);
       localStorage.setItem('customerId', response.data.customerId);
       
-      // Salva o email do cliente (essencial para o fluxo de pagamento)
+      
       if (response.data.email) {
         localStorage.setItem('customerEmail', response.data.email);
       } else {
-        // Fallback: se o backend não retornar o email, usa o email digitado no formulário
+     
         localStorage.setItem('customerEmail', formData.email); 
         console.warn("Backend não retornou 'email' na resposta de login. Usando o email do formulário.");
       }
       
-      // Dispara um evento para notificar outros componentes sobre a mudança no localStorage
+  
       window.dispatchEvent(new Event('storage')); 
 
-      // Redireciona para a página principal (Home) após o login
+
       navigate('/');
 
     } catch (error) {
       console.error('Erro no login:', error);
       if (error.response) {
-        // Erros de resposta do servidor (ex: 403 Forbidden para credenciais inválidas)
+      
         if (error.response.status === 403) {
           setMessage("Email ou senha inválidos.");
         } else {
           setMessage(`Erro: ${error.response.data?.message || error.response.statusText}`);
         }
       } else if (error.request) {
-        // Erros de requisição (servidor não respondeu)
+      
         setMessage("Não foi possível conectar ao servidor. Tente novamente mais tarde.");
       } else {
-        // Outros erros inesperados
+    
         setMessage("Ocorreu um erro inesperado. Por favor, tente novamente.");
       }
       setMessageType('error');
@@ -71,37 +71,37 @@ const Login = () => {
   };
 
   return (
-    <div className='loginsignup'> {/* Reutilizando a classe CSS */}
+    <div className='loginsignup'> 
       <div className="loginsignup-container">
-        <h1>Login</h1> {/* Título para a página de login */}
+        <h1>Login</h1> 
         <form onSubmit={handleSubmit}>
           <div className="loginsignup-fields">
-            {/* Campo de Email */}
+           
             <input 
               type="email" 
               placeholder='Email Address' 
-              name="email" // Importante: o nome deve corresponder à chave no formData
+              name="email"
               value={formData.email}
               onChange={handleChange}
               required 
             />
-            {/* Campo de Senha */}
+            
             <input 
               type="password" 
               placeholder='Password' 
-              name="password" // Importante: o nome deve corresponder à chave no formData
+              name="password"
               value={formData.password}
               onChange={handleChange}
               required 
             />
           </div>
-          <button type="submit">Continue</button> {/* Botão de envio do formulário */}
+          <button type="submit">Continue</button> 
         </form>
         
-        {/* Exibe mensagens de sucesso ou erro */}
+        
         {message && <p className={`message ${messageType}`}>{message}</p>}
 
-        {/* Link para a página de cadastro */}
+       
         <p className="loginsignup-login">
           Don't have an account? 
           <span 
@@ -111,7 +111,7 @@ const Login = () => {
             Sign Up here!
           </span>
         </p>
-        {/* Checkbox de termos (opcional para login, mas mantido para consistência com o Sign Up) */}
+    
       </div>
     </div>
   );

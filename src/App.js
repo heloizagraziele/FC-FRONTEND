@@ -7,19 +7,17 @@ import ShopCategory from './Pages/ShopCategory';
 import Product from './Pages/Product';
 import Cart from './Pages/Cart';
 import LoginSignup from './Pages/LoginSignup';
-import Footer from './Components/Footer/Footer';
 import AddressForm from './Components/AddressForm/AddressForm';
-import woman_banner from './Components/Assets/woman_banner.png';
 import Payment from './Components/Payment/Payment';
 
-// IMPORTAÇÃO DO CONTEXTO
+
 import ShopContextProvider from './Context/ShopContext';
 import Login from './Pages/Login';
 import Profile from './Pages/Profile';
 
 function App() {
   return (
-    // PROVIDER ENVOLVENDO TODA A APLICAÇÃO
+    
     <ShopContextProvider>
       <BrowserRouter>
         <Navbar />
@@ -36,7 +34,6 @@ function App() {
           <Route path='/checkout' element={<Payment/>} />
           <Route path='/profile' element={<Profile/>} />
         </Routes>
-       { /*<Footer />*/}
       </BrowserRouter>
     </ShopContextProvider>
   );

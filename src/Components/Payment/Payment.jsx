@@ -20,7 +20,7 @@ const Payment = () => {
         }
     }, [location.state, navigate]);
 
-    // Função para lidar com o sucesso do pagamento
+  
     const handlePaymentSuccess = (response) => {
         console.log("Pagamento realizado com sucesso:", response);
         setPaymentStatus('success');
@@ -53,7 +53,7 @@ const Payment = () => {
     const MERCADO_PAGO_PUBLIC_KEY = "TEST-b75e606f-0bd7-448b-a72f-8e42b0d1a776"; 
 
     return (
-        // Aplicando a classe CSS do container principal
+        
         <div className="payment-container">
             <h1 className="payment-title">Finalizar Pedido</h1>
             

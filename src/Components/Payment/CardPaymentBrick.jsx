@@ -3,25 +3,22 @@ import React, { useEffect, useRef } from "react";
 
 export default function CardPaymentBrick({
   publicKey,
-  amount = 100, // O valor padrão é 100, mas será sobrescrito pela prop 'amount' do Payment.jsx
+  amount = 100,
   payerEmail = "",
-  compraId, // O ID do pedido/compra (vem do orderId)
-  clienteId, // O ID do cliente
-  onPaymentSuccess, // Callback para sucesso do pagamento
-  onPaymentError, // Callback para erro no pagamento
+  compraId, 
+  clienteId, 
+  onPaymentSuccess, 
+  onPaymentError, 
 }) {
-  const brickContainerRef = useRef(null); // Ref para o div onde o Brick será renderizado
-  const scriptRef = useRef(null); // Ref para controlar se o script do Mercado Pago já foi carregado
+  const brickContainerRef = useRef(null); 
+  const scriptRef = useRef(null);
 
 
   useEffect(() => {
     const initializeBrick = async () => {
-      // Verifica se o SDK do Mercado Pago está disponível e se o container existe
+     
       if (!window.MercadoPago || !brickContainerRef.current) return;
 
-
-      // Limpa o conteúdo do container antes de criar um novo Brick para evitar duplicação.
-      // Isso é importante se o componente for re-montado.
       brickContainerRef.current.innerHTML = "";
 
 
@@ -31,23 +28,21 @@ export default function CardPaymentBrick({
 
       await bricksBuilder.create("cardPayment", brickContainerRef.current.id, {
         initialization: {
-          amount, // O valor da transação
-          payer: { email: payerEmail }, // O email do pagador
-          // Você pode adicionar mais dados do pagador aqui se seu backend precisar
-          // e o Brick os coletar (ex: identification)
+          amount, 
+          payer: { email: payerEmail }, 
         },
         customization: {
-          visual: { style: { theme: "dark" } }, // Tema do Brick (pode ser light, dark, custom)
-          paymentMethods: { maxInstallments: 1 }, // Número máximo de parcelas (1 para pagamento à vista)
+          visual: { style: { theme: "dark" } },
+          paymentMethods: { maxInstallments: 1 }, 
         },
         callbacks: {
           onReady: () => {
             console.log("Brick pronto!");
           },
           onSubmit: (cardFormData) => {
-            const requestId = crypto.randomUUID(); // Gera um UUID único
+            const requestId = crypto.randomUUID(); 
             return new Promise((resolve, reject) => {
-              // --- Pega o token de autenticação do localStorage ---
+              
               const token = localStorage.getItem('token');
               if (!token) {
                 console.error("Token de autenticação não encontrado no localStorage.");
@@ -58,21 +53,21 @@ export default function CardPaymentBrick({
               // ----------------------------------------------------
 
 
-              // Monta o payload para enviar ao seu backend
+              
               const payload = {
-                ...cardFormData, // Contém token do cartão, payment_method_id, installments, issuer_id
-                compraId: compraId, // ID do pedido/compra
-                clienteId: clienteId, // ID do cliente
-                transaction_amount: amount, // O valor da transação (para validação no backend)
+                ...cardFormData, 
+                compraId: compraId, 
+                clienteId: clienteId, 
+                transaction_amount: amount,  
                 payer: {
-                  ...cardFormData.payer, // Campos do pagador que o Brick coletou
-                  email: payerEmail, // Garante que o email do pagador esteja presente
+                  ...cardFormData.payer, 
+                  email: payerEmail, 
                 },
               };
               console.log("Payload a ser enviado para o backend:", payload);
 
 
-              // Faz a requisição POST para o seu endpoint de pagamento no backend
+              
               fetch("http://localhost:8080/api/mercadopago/cartao", {
                 method: "POST",
                 headers: {
@@ -100,7 +95,7 @@ export default function CardPaymentBrick({
                   console.log("Resposta do backend:", data);
                   // Chama o callback de sucesso passado pelas props
                   onPaymentSuccess?.(data);
-                  resolve(); // Resolve a Promise do onSubmit
+                  resolve(); 
                 })
                 .catch((err) => {
                   console.error("Erro no fetch:", err);
