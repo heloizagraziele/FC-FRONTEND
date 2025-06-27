@@ -1,0 +1,133 @@
+
+.user-profile-container {
+    min-height: 100vh;
+    background-color: #eaf1ff; /* bg-gray-900 */
+    color: #261276; /* text-white */
+    padding: 1.5rem; /* p-6 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Raleway';
+}
+
+.profile-card {
+    width: 100%;
+    max-width: 48rem; /* max-w-2xl */
+    background-color: #cbb6dd; /* bg-gray-800 */
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 2rem; /* p-8 */
+    margin-bottom: 2rem; /* mb-8 */
+}
+
+.profile-title {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 1.5rem; /* mb-6 */
+    text-align: center;
+}
+
+.profile-info-item {
+    padding-bottom: 1rem; /* pb-4 */
+    margin-bottom: 1.5rem; /* mb-6 */
+    border-bottom: 1px solid #e3cfe7; /* border-b border-gray-700 */
+}
+
+.profile-info-label {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    color: #a0aec0; /* text-gray-400 */
+}
+
+.profile-info-value {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 500; /* font-medium */
+}
+
+.addresses-section {
+    width: 100%;
+    max-width: 48rem; /* max-w-2xl */
+    background-color: #eaf1ff; /* bg-gray-800 */
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 2rem; /* p-8 */
+}
+
+.addresses-title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 1rem; /* mb-4 */
+    text-align: center;
+}
+
+.address-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* space-y-4 */
+}
+
+.address-item {
+    background-color: #cbb6dd; /* bg-gray-700 */
+    padding: 1rem;
+    border-radius: 0.25rem; 
+    border: 1px solid hsl(228, 100%, 95%); /* border border-gray-600 */
+}
+
+.address-item p {
+    margin-bottom: 0.25rem; /* Pequeno espaçamento entre linhas do endereço */
+}
+
+.address-item .font-semibold {
+    font-weight: 600; /* font-semibold */
+}
+
+.no-addresses-message {
+    text-align: center;
+    color: #a0aec0; /* text-gray-400 */
+}
+
+.add-address-button {
+    margin-top: 1.5rem;
+    width: 100%; 
+    background-color: rgb(78,122,177); 
+    color: #edf2f7;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem; 
+    border-radius: 30px; 
+    font-weight: 600; 
+    font-family: 'Raleway';
+    border-color: #2b0439;
+}
+
+.add-address-button:hover {
+    background-color: rgb(30, 68, 113); 
+}
+
+
+.message-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a202c;
+    color: #edf2f7;
+    padding: 1rem;
+    text-align: center;
+}
+
+.error-message-box {
+    color: #f56565; 
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.back-home-button {
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #3182ce;
+    color: #edf2f7;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+}
+
+.back-home-button:hover {
+    background-color: #2c5282;
+}
