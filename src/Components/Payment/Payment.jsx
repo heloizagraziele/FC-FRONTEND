@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import CardPaymentBrick from './CardPaymentBrick'; // Ajuste o caminho conforme a sua estrutura de pastas
-import './Payment.css'; // <--- Importe o CSS do caminho correto
+import CardPaymentBrick from './CardPaymentBrick'; 
+import './Payment.css'; 
 
 const Payment = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [orderData, setOrderData] = useState(null);
-    const [paymentStatus, setPaymentStatus] = useState(null); // 'success', 'error', 'pending'
+    const [paymentStatus, setPaymentStatus] = useState(null); 
 
     console.log("Dados da Ordem no Payment.jsx:", orderData);
     

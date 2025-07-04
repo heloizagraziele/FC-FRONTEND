@@ -30,9 +30,9 @@
 .shopcategory-products {
   margin: 40px 170px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsivo */
-  gap: 40px; /* espaço entre colunas e linhas */
-  justify-items: center; /* centraliza os itens */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px; 
+  justify-items: center; 
 }
 
 .shopcatedory-loadmore{

@@ -1,9 +1,9 @@
 import React from 'react';
 import './CSS/LoginSignup.css';
-import { useNavigate } from 'react-router-dom'; // <--- Importe useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 const LoginSignup = () => {
-  const navigate = useNavigate(); // <--- Inicialize useNavigate
+  const navigate = useNavigate(); 
 
   return (
     <div className='loginsignup'>
@@ -18,8 +18,8 @@ const LoginSignup = () => {
         <p className="loginsignup-login">
           Already have an account? 
           <span 
-            onClick={() => navigate('/login')} // <--- Adicione o onClick aqui
-            style={{ cursor: 'pointer', textDecoration: 'underline' }} // <--- Opcional: Adiciona estilo para indicar que é clicável
+            onClick={() => navigate('/login')} 
+            style={{ cursor: 'pointer', textDecoration: 'underline' }}
           >
             Login here!
           </span>

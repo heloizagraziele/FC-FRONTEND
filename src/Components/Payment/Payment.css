@@ -1,64 +1,58 @@
-/* src/Pages/CSS/Payment.css */
-
 .payment-container {
     min-height: 100vh;
-    background-color: #edddff; /* Fundo cinza escuro para contraste */
-    color: #ffffff; /* Texto branco */
+    background-color: #edddff;
+    color: #ffffff;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Alinha o conteúdo ao topo */
-    padding-top: 50px; /* Espaço do topo */
+    justify-content: flex-start;
+    padding-top: 50px;
 }
 
 .payment-title {
-    font-size: 2.25rem; /* Título maior */
+    font-size: 2.25rem;
     font-weight: 700;
-    margin-bottom: 2rem; /* Mais espaço abaixo do título */
+    margin-bottom: 2rem;
     text-align: center;
-    color: #B695C9; /* Título em lilás */
+    color: #B695C9;
 }
 
 .order-details-card {
-    background-color: #B695C9; /* Fundo cinza médio para o card */
+    background-color: #B695C9;
     padding: 2rem;
-    border-radius: 0.75rem; /* Bordas mais arredondadas */
-    margin-bottom: 2rem; /* Espaço abaixo do card de detalhes */
-    color: #ffffff; /* Texto branco no card */
+    border-radius: 0.75rem;
+    margin-bottom: 2rem;
+    color: #ffffff;
     text-align: center;
     width: 100%;
-    max-width: 450px; /* Largura máxima para o card */
-    box-sizing: border-box; /* Inclui padding e borda na largura */
+    max-width: 450px;
+    box-sizing: border-box;
 }
 
 .order-detail-text {
-    font-size: 1.125rem; /* Tamanho da fonte para detalhes */
+    font-size: 1.125rem;
     margin-bottom: 0.5rem;
 }
 
 .order-detail-text span {
-    font-weight: 600; /* Negrito para valores */
-    color: #2e0a41; /* Lilás para os valores importantes */
+    font-weight: 600;
+    color: #2e0a41;
 }
 
 .order-detail-email {
     font-size: 1rem;
     margin-top: 1rem;
     font-weight: 500;
-    color: #cbd5e0; /* Cinza claro para o email */
+    color: #cbd5e0;
 }
 
-/* Estilos para o Brick de Pagamento */
-/* O próprio CardPaymentBrick tem estilos internos do Mercado Pago,
-   mas o container pode ter um padding/margem */
 .card-payment-brick-wrapper {
     width: 100%;
-    max-width: 450px; /* Ajusta à largura do card de detalhes */
+    max-width: 450px;
     margin-bottom: 1.5rem;
 }
 
-/* Mensagens de status de pagamento */
 .payment-status-message {
     padding: 1rem;
     border-radius: 0.5rem;
@@ -71,16 +65,15 @@
 }
 
 .payment-status-success {
-    background-color: #38a169; /* Verde para sucesso */
+    background-color: #38a169;
     color: white;
 }
 
 .payment-status-error {
-    background-color: #e53e3e; /* Vermelho para erro */
+    background-color: #e53e3e;
     color: white;
 }
 
-/* Mensagem de carregamento inicial */
 .loading-message-container {
     min-height: 100vh;
     display: flex;

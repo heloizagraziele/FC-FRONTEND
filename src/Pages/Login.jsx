@@ -1,30 +1,28 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Para fazer a requisição HTTP para o backend
-import { useNavigate } from 'react-router-dom'; // Para redirecionar após o login
-import './CSS/LoginSignup.css'; // Reutiliza o mesmo CSS do LoginSignup
+import axios from 'axios'; 
+import { useNavigate } from 'react-router-dom'; 
+import './CSS/LoginSignup.css'; 
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-  const [message, setMessage] = useState(''); // Para exibir mensagens de sucesso/erro
-  const [messageType, setMessageType] = useState(''); // Para estilizar a mensagem (success/error)
-  const navigate = useNavigate(); // Hook para navegação
+  const [message, setMessage] = useState(''); 
+  const [messageType, setMessageType] = useState('');
+  const navigate = useNavigate(); 
 
-  // Função para atualizar o estado do formulário conforme o usuário digita
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Função para lidar com o envio do formulário de login
+
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Previne o comportamento padrão do formulário de recarregar a página
-    setMessage(''); // Limpa mensagens anteriores
+    e.preventDefault();
+    setMessage(''); 
     setMessageType('');
 
     try {
-      // Faz a requisição POST para o endpoint de autenticação do seu backend
       const response = await axios.post('http://localhost:8080/api/auth', formData);
       console.log('Login bem-sucedido:', response.data);
       setMessage("Login realizado com sucesso!");

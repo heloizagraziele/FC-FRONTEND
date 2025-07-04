@@ -84,11 +84,10 @@
     font-size: 15px;
 }
 
-/* --- ESTILIZAÇÃO DO BOTÃO ADICIONAR AO CARRINHO (productdisplay-right button) --- */
 .productdisplay-right button {
-    /* Mantendo suas propriedades existentes e adicionando as novas */
+
     padding: 12px 24px;
-    background: rgb(169, 92, 195); /* Cor original */
+    background: rgb(169, 92, 195);
     color: white;
     font-weight: bold;
     border: none;
@@ -96,24 +95,24 @@
     width: fit-content;
     cursor: pointer;
     
-    /* Propriedades para um visual mais interessante */
-    font-size: 16px; /* Ajustado para um bom tamanho */
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Transição suave */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra inicial sutil */
+   
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .productdisplay-right button:hover {
-    background-color: rgb(145, 78, 168); /* Um pouco mais escuro no hover */
-    transform: translateY(-2px); /* Efeito de "levantar" */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra maior no hover */
+    background-color: rgb(145, 78, 168); 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
 }
 
 .productdisplay-right button:active {
-    background-color: rgb(120, 65, 140); /* Ainda mais escuro ao clicar */
-    transform: translateY(0); /* Volta à posição normal */
-    box-shadow: none; /* Remove a sombra ao clicar */
+    background-color: rgb(120, 65, 140);
+    transform: translateY(0); 
+    box-shadow: none; 
 }
-/* --------------------------------------------------------------------------------- */
+
 
 .productdisplay-right-category {
     margin-top: 10px;
@@ -162,11 +161,10 @@
         padding: 14px 20px;
     }
     .productdisplay-right button{
-        /* Largura e padding ajustados para responsividade */
         width: 150px;
         padding: 15px 0px;
         margin-bottom: 20px;
-        font-size: 16px; /* Mantém o tamanho da fonte original */
+        font-size: 16px;
     }
     .productdisplay-right-category{
         margin-top: 5px;

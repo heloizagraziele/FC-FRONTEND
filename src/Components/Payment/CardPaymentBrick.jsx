@@ -50,7 +50,7 @@ export default function CardPaymentBrick({
                 onPaymentError?.(new Error(errorMessage));
                 return reject(new Error(errorMessage));
               }
-              // ----------------------------------------------------
+            
 
 
               
