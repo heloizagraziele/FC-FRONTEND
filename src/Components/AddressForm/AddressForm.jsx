@@ -128,10 +128,10 @@ const AddressForm = () => {
         {message && <p className={`message ${messageType}`}>{message}</p>}
         <p className="loginsignup-login">
           <span
-            onClick={() => navigate('/profile/addresses')} 
+            onClick={() => navigate('/profile')} 
             style={{ cursor: 'pointer', textDecoration: 'underline' }}
           >
-            Voltar para Meus Endereços
+            Voltar para Meu Perfil
           </span>
         </p>
       </div>

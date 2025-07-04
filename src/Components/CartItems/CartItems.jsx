@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'; 
+import React, { useContext, useState, useEffect } from 'react';
 import './CartItems.css';
 import { ShopContext } from '../../Context/ShopContext';
 import remove_icon from '../Assets/cart_cross_icon.png';
@@ -12,24 +12,31 @@ const CartItems = () => {
 
     const [selectedAddressId, setSelectedAddressId] = useState(null);
     const [customerAddresses, setCustomerAddresses] = useState([]);
+    const [loadingAddresses, setLoadingAddresses] = useState(true);
+    const [addressError, setAddressError] = useState(null); 
 
     useEffect(() => {
         const fetchAddresses = async () => {
+            setLoadingAddresses(true); 
+            setAddressError(null);     
+
             const customerId = localStorage.getItem('customerId');
             const token = localStorage.getItem('token');
 
             if (!customerId || !token || isNaN(parseInt(customerId, 10))) {
                 console.warn("Usuário não logado ou customerId inválido. Não é possível buscar endereços.");
+                setLoadingAddresses(false);
                 return;
             }
 
-{   /*         try {
-                const response = await axios.get(`http://localhost:8080/api/customers/${customerId}/addresses`, {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/addresses/customer/${customerId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
                 setCustomerAddresses(response.data);
+                
                 if (response.data.length > 0) {
                     setSelectedAddressId(response.data[0].id);
                 } else {
@@ -37,12 +44,14 @@ const CartItems = () => {
                 }
             } catch (error) {
                 console.error("Erro ao buscar endereços do cliente:", error);
-                alert(`Erro ao carregar seus endereços: ${error.response?.data?.message || 'Verifique sua conexão.'}`);
-            }*/}
+                setAddressError(`Erro ao carregar seus endereços: ${error.response?.data?.message || 'Verifique sua conexão.'}`);
+            } finally {
+                setLoadingAddresses(false); 
+            }
         };
 
         fetchAddresses();
-    }, []);
+    }, []); 
 
     const isUserLoggedIn = () => {
         const token = localStorage.getItem('token');
@@ -62,13 +71,20 @@ const CartItems = () => {
             return;
         }
 
+       
+        if (!selectedAddressId) {
+            alert("Por favor, selecione um endereço de entrega.");
+            return;
+        }
+        
+
         const customerId = parseInt(localStorage.getItem('customerId'), 10);
         const token = localStorage.getItem('token');
         const payerEmail = localStorage.getItem('customerEmail');
 
         const items = Object.keys(cartItems).map(productId => {
             const quantity = cartItems[productId];
-           
+            
             const product = all_products.find(p => p.id === parseInt(productId, 10)); 
             if (!product) {
                 console.error(`Produto com ID ${productId} não encontrado em all_products.`);
@@ -83,7 +99,7 @@ const CartItems = () => {
         const orderPayload = {
             customerId: customerId,
             items: items,
-            deliveryAddressId: selectedAddressId
+            deliveryAddressId: selectedAddressId 
         };
 
         try {
@@ -97,6 +113,9 @@ const CartItems = () => {
             const createdOrder = response.data;
             console.log("Pedido criado com sucesso:", createdOrder);
 
+            
+            clearCart(); 
+
             navigate('/checkout', {
                 state: {
                     orderId: createdOrder.id,
@@ -107,7 +126,14 @@ const CartItems = () => {
 
         } catch (error) {
             console.error("Erro ao criar pedido:", error);
-            alert(`Erro ao criar seu pedido: ${error.response?.data?.message || 'Verifique os itens do carrinho ou tente novamente.'}`);
+           
+            let errorMessage = 'Verifique os itens do carrinho ou tente novamente.';
+            if (error.response && error.response.data && error.response.data.message) {
+                errorMessage = error.response.data.message;
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+            alert(`Erro ao criar seu pedido: ${errorMessage}`);
         }
     };
 
@@ -144,6 +170,39 @@ const CartItems = () => {
                     </div>
                 );
             })}
+
+           
+            <div className="cartitems-addresses-section">
+                <h2>Selecione o Endereço de Entrega</h2>
+                {loadingAddresses ? (
+                    <p>Carregando endereços...</p>
+                ) : addressError ? (
+                    <p className="error-message">{addressError}</p>
+                ) : customerAddresses.length === 0 ? (
+                    <p>Você não tem endereços cadastrados. Por favor, adicione um endereço no seu <a href="/profile">perfil</a>.</p>
+                ) : (
+                    <div className="address-selection-list">
+                        {customerAddresses.map(address => (
+                            <div key={address.id} className="address-option">
+                                <input
+                                    type="radio"
+                                    id={`address-${address.id}`}
+                                    name="deliveryAddress"
+                                    value={address.id}
+                                    checked={selectedAddressId === address.id}
+                                    onChange={() => setSelectedAddressId(address.id)}
+                                />
+                                <label htmlFor={`address-${address.id}`}>
+                                    <p className="address-text">{address.street}, {address.number} {address.complement && `- ${address.complement}`}</p>
+                                    <p className="address-text">{address.neighborhood}, {address.city} - {address.state}</p>
+                                    <p className="address-text">CEP: {address.zipCode}</p>
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+          
 
             <div className="cartitems-down">
                 <div className="cartitems-total">
